@@ -1,20 +1,17 @@
- require 'faker'
+# frozen_string_literal: true
 
- 
- 10.times do
- 
-   Club.create!(
- 
-     name:  Faker::Color.color_name,
-     address:   Faker::HitchhikersGuideToTheGalaxy.location,
-     contact:   Faker::DrWho.character,
-     email:  Faker::TheITCrowd.email,
-     type: %w[ sport music art drama science general ].sample
-   )
- end
+require "faker"
 
- clubs = Club.all
- 
+10.times do
+  Club.create!(
+    name:    Faker::Color.color_name,
+    address: Faker::HitchhikersGuideToTheGalaxy.location,
+    contact: Faker::DrWho.character,
+    email:   Faker::TheITCrowd.email
+  )
+end
 
- puts "Seed finished"
- puts "#{Club.count} clubs created"
+clubs = Club.all
+
+puts "Seed finished"
+puts "#{Club.count} clubs created"
