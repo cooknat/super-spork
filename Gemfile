@@ -9,7 +9,6 @@ ruby "2.4.4"
 gem "rails", "~> 5.2.1"
 # Use postgres as the database for Active Record
 gem "bootstrap-sass"
-gem "capybara"
 gem "font-awesome-sass", "~> 5.3.1"
 gem "haml"
 gem "pg"
@@ -50,6 +49,11 @@ group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "faker"
   gem "pry-rails"
+  gem 'rspec-rails', '~> 3.8'
+  gem "capybara"
+  gem 'shoulda'
+  gem 'shoulda-matchers', '4.0.0.rc1'
+  gem 'factory_bot'
 end
 
 group :development do
