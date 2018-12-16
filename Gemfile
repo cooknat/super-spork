@@ -47,13 +47,13 @@ gem "bootsnap", ">= 1.1.0", require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "capybara"
+  gem "factory_bot_rails", "~> 4.0"
   gem "faker"
   gem "pry-rails"
-  gem 'rspec-rails', '~> 3.8'
-  gem "capybara"
-  gem 'shoulda'
-  gem 'shoulda-matchers', '4.0.0.rc1'
-  gem "factory_bot_rails", "~> 4.0"
+  gem "rspec-rails", "~> 3.8"
+  gem "shoulda"
+  gem "shoulda-matchers", "4.0.0.rc1"
 end
 
 group :development do
