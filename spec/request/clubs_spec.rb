@@ -1,6 +1,15 @@
-# frozen_string_literal: true
-
 require "rails_helper"
 
 RSpec.describe ClubsController, type: :request do
+	describe '#index' do
+		it "returns http success" do
+      get '/clubs'
+      expect(response.status).to eq 200
+    end
+    
+    it "renders the index template" do
+      get '/clubs'
+      expect(response).to render_template(:index)
+    end
+	end
 end
