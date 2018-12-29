@@ -3,7 +3,8 @@
 .ul
   - @clubs.each do |club|
     .li
-      Club Name
-      = club.name
+      = link_to club.name, club_path(club.id)
       Club Type  
       = club.club_type
+
+
