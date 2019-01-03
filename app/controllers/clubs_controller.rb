@@ -1,9 +1,11 @@
-class ClubsController < ApplicationController
-	def index
-		@clubs = Club.all		
-	end
+# frozen_string_literal: true
 
-	def show
-		@club = Club.find(params[:id])
-	end
+class ClubsController < ApplicationController
+  def index
+    @clubs = Club.all
+  end
+
+  def show
+    @club = Club.find(params[:id])
+  end
 end

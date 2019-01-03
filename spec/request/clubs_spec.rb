@@ -1,27 +1,31 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ClubsController, type: :request do
-	describe '#index' do
-		it "returns http success" do
-      get '/clubs'
+  let(:my_club) { FactoryBot.create(:club, name: "my fecking great club", club_type: "Drama") }
+
+  describe "#index" do
+    it "returns http success" do
+      get "/clubs"
       expect(response.status).to eq 200
     end
-    
+
     it "renders the index template" do
-      get '/clubs'
+      get "/clubs"
       expect(response).to render_template(:index)
     end
-	end
+  end
 
-	describe '#show' do
-		it "returns http success" do
-      get '/clubs'
+  describe "#show" do
+    it "returns http success" do
+      get "/clubs/", params: {id: my_club.id}
       expect(response.status).to eq 200
     end
-    
+
     it "renders the show template" do
-      get '/clubs'
+      get "/clubs/#{my_club.id}"
       expect(response).to render_template(:show)
     end
-	end
+  end
 end

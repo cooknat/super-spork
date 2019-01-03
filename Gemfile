@@ -15,6 +15,7 @@ gem "pg"
 gem "pry"
 gem "rails_12factor"
 gem "rubocop"
+gem "devise"
 # Use Puma as the app server
 gem "puma", "~> 3.11"
 # Use SCSS for stylesheets
@@ -51,6 +52,7 @@ group :development, :test do
   gem "factory_bot_rails", "~> 4.0"
   gem "faker"
   gem "pry-rails"
+  gem "rails-controller-testing"
   gem "rspec-rails", "~> 3.8"
   gem "shoulda"
   gem "shoulda-matchers", "4.0.0.rc1"
