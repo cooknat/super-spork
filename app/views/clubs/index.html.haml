@@ -2,7 +2,7 @@
   Clubs
 = form_tag(clubs_path, method: :get) do 
   Club
-  = text_field_tag :club
+  = text_field_tag :club, params[:club]
   = submit_tag 'Search', name: nil
 %ul
   - @clubs.each do |club|
@@ -10,5 +10,4 @@
       = link_to club.name, club_path(club.id)
       Club Type  
       = club.club_type
-
 
