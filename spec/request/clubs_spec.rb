@@ -28,4 +28,16 @@ RSpec.describe ClubsController, type: :request do
       expect(response).to render_template(:show)
     end
   end
+
+  describe "#new" do
+  	it "returns http success" do
+      get "/clubs/new"
+      expect(response.status).to eq 200
+    end
+
+    it "renders the new template" do
+      get "/clubs/new"
+      expect(response).to render_template(:new)
+    end
+  end
 end

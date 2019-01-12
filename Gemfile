@@ -9,14 +9,14 @@ ruby "2.4.4"
 gem "rails", "~> 5.2.1"
 # Use postgres as the database for Active Record
 gem "bootstrap-sass"
+gem "devise"
 gem "font-awesome-sass", "~> 5.3.1"
 gem "haml"
 gem "pg"
 gem "pry"
+gem "pundit"
 gem "rails_12factor"
 gem "rubocop"
-gem "devise"
-gem "pundit"
 # Use Puma as the app server
 gem "puma", "~> 3.11"
 # Use SCSS for stylesheets

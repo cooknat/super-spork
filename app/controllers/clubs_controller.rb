@@ -2,15 +2,14 @@
 
 class ClubsController < ApplicationController
   def index
-    if params[:club]
-      @clubs = Club.where('name LIKE ?', "%#{params[:club]}%")
-    else
-      @clubs = Club.all
-    end
+    @clubs = if params[:club]
+               Club.where("name LIKE ?", "%#{params[:club]}%")
+             else
+               Club.all
+             end
   end
 
   def show
     @club = Club.find(params[:id])
   end
 end
-
