@@ -17,6 +17,9 @@ gem "pry"
 gem "pundit"
 gem "rails_12factor"
 gem "rubocop"
+gem "devise"
+gem "pundit"
+
 # Use Puma as the app server
 gem "puma", "~> 3.11"
 # Use SCSS for stylesheets

@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 # frozen_string_literal: true
 
+=======
+>>>>>>> working-specs
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -48,4 +51,8 @@ class ApplicationPolicy
       scope.all
     end
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> working-specs
