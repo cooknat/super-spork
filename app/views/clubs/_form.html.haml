@@ -1,0 +1,20 @@
+= form_for @club do |f| 
+	%div
+		= f.label :name
+		= f.text_field :name
+	%div
+		= f.label :address
+		= f.text_area :address, placeholder: "Business address"
+	%div	  
+		= f.label :contact
+		= f.text_field :contact, placeholder: "Name of principal contact"
+	%div
+		= f.label :email
+		= f.text_field :email, placeholder: "Email of principal contact"
+	%div  
+		= f.select :club_type, options_for_select(Club.where.not(club_type: nil).pluck(:club_type).uniq)
+	%div
+		= f.label :active
+		= f.check_box :active  
+	%div
+		= f.submit "Save" 

@@ -30,7 +30,7 @@ RSpec.describe ClubsController, type: :request do
   end
 
   describe "#new" do
-  	it "returns http success" do
+    it "returns http success" do
       get "/clubs/new"
       expect(response.status).to eq 200
     end
@@ -40,14 +40,14 @@ RSpec.describe ClubsController, type: :request do
       expect(response).to render_template(:new)
     end
   end
- 
+
   describe "#create" do
     it "increases the number of Club by 1" do
-      expect{ post "/clubs/", params: { club: { name: "New Club" } } }.to change(Club,:count).by(1)
-    end  
+      expect { post "/clubs/", params: {club: {name: "New Club"}} }.to change(Club, :count).by(1)
+    end
 
     it "redirects to the new club" do
-      post "/clubs/", params:  { club: { name: "New Club" } }
+      post "/clubs/", params: {club: {name: "New Club"}}
       expect(response).to redirect_to Club.last
     end
   end
