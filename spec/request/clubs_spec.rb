@@ -51,4 +51,29 @@ RSpec.describe ClubsController, type: :request do
       expect(response).to redirect_to Club.last
     end
   end
+
+  describe "#edit" do
+    it "returns http success" do
+      get "/clubs/#{my_club.id}/edit"
+      expect(response.status).to eq 200
+    end
+
+    it "renders the new template" do
+      get "/clubs/#{my_club.id}/edit"
+      expect(response).to render_template(:edit)
+    end
+  end
+ 
+    
+
+  # describe "#update" do
+  #   it "increases the number of Club by 1" do
+  #     expect { post "/clubs/", params: {club: {name: "New Club"}} }.to change(Club, :count).by(1)
+  #   end
+
+  #   it "redirects to the new club" do
+  #     post "/clubs/", params: {club: {name: "New Club"}}
+  #     expect(response).to redirect_to Club.last
+  #   end
+  # end
 end
