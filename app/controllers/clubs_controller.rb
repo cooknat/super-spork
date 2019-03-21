@@ -39,7 +39,32 @@ class ClubsController < ApplicationController
   	@club = Club.find(params[:id])
   end
 
-  def update; end
+  def update
+  	@club.name = params[:club][:name]
+    @club.address = params[:club][:address]
+    @club.contact = params[:club][:contact]
+    @club.email = params[:club][:email]
+    @club.club_type = params[:club][:club_type]
+    @club.active = params[:club][:active]
 
-  def destroy; end
+    if @club.save
+      flash[:notice] = "Club was updated."
+      redirect_to @club
+    else
+      flash.now[:alert] = "There was an error saving the changes. Please try again."
+      render :edit
+    end
+  end
+
+  def destroy
+  	@club = Club.find(params[:id])
+ 
+     if @club.destroy
+       flash[:notice] = "\"#{@club.name}\" was deleted successfully."
+       redirect_to clubs_path
+     else
+       flash.now[:alert] = "There was an error deleting the club."
+       render :show
+     end
+  end
 end

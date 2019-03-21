@@ -63,17 +63,29 @@ RSpec.describe ClubsController, type: :request do
       expect(response).to render_template(:edit)
     end
   end
+
+  describe "#update" do
+    it "updates club with new attributes" do
+      expect { post "/clubs/", params: {club: {name: "New Club"}} }.to change(Club, :count).by(1)
+    end
+
+    it "redirects to the new club" do
+      post "/clubs/", params: {club: {name: "New Club"}}
+      expect(response).to redirect_to Club.last
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "deletes the club" do
+      delete "/clubs/#{my_club.id}"
+      count = Club.where({id: my_club.id}).size   
+      expect(count).to eq 0
+    end
  
-    
+     it "redirects to clubs index" do
+       delete "/clubs/#{my_club.id}"
+       expect(response).to redirect_to clubs_path
+     end
+   end
 
-  # describe "#update" do
-  #   it "increases the number of Club by 1" do
-  #     expect { post "/clubs/", params: {club: {name: "New Club"}} }.to change(Club, :count).by(1)
-  #   end
-
-  #   it "redirects to the new club" do
-  #     post "/clubs/", params: {club: {name: "New Club"}}
-  #     expect(response).to redirect_to Club.last
-  #   end
-  # end
 end
