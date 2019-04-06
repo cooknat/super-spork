@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+	let(:user) { User.new(email: 'n@n.com', password: 'password1') }
+
   describe "attributes" do
     it "responds to role" do
       expect(user).to respond_to(:role)
@@ -18,8 +20,9 @@ RSpec.describe User, type: :model do
   end
 
   describe "roles" do
+  	before { user.save! }
     it "is member by default" do
-      expect(user.role).to eql("member")
+      expect(user.role).to eq('member')
     end
  
     context "member user" do
