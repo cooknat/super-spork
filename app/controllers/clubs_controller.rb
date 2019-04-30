@@ -1,6 +1,9 @@
-# frozen_string_literal: true
-
 class ClubsController < ApplicationController
+
+	 # before_action :require_sign_in, only: [:delete, :destroy]
+
+   before_action :authorize_user, only: [:delete, :destroy]
+
   def index
     @clubs = if params[:club]
                Club.where("name LIKE ?", "%#{params[:club]}%")
@@ -58,7 +61,7 @@ class ClubsController < ApplicationController
 
   def destroy
   	@club = Club.find(params[:id])
- 
+
      if @club.destroy
        flash[:notice] = "\"#{@club.name}\" was deleted successfully."
        redirect_to clubs_path
@@ -67,4 +70,13 @@ class ClubsController < ApplicationController
        render :show
      end
   end
+
+  private
+
+    def authorize_user
+      unless current_user.admin?
+        flash[:alert] = "You must be an admin to do that."
+        redirect_to club_path(params[:id])
+      end
+   end
 end

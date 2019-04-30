@@ -4,6 +4,12 @@ require "rails_helper"
 
 RSpec.describe ClubsController, type: :request do
   let(:my_club) { FactoryBot.create(:club, name: "my fecking great club", club_type: "Drama") }
+  
+   before do
+     member_user = User.create!(email: "member_user@bloccit.com", password: "helloworld", role: :member)
+     create_session(member_user)
+     sign_in member_user
+   end
 
   describe "#index" do
     it "returns http success" do
@@ -75,17 +81,33 @@ RSpec.describe ClubsController, type: :request do
     end
   end
 
-  describe "DELETE destroy" do
-    it "deletes the club" do
-      delete "/clubs/#{my_club.id}"
-      count = Club.where({id: my_club.id}).size   
-      expect(count).to eq 0
+  context 'admin user' do
+  	before do
+      admin_user = User.create!(email: "admin_user@bloccit.com", password: "helloworld", role: :admin)
+      create_session(admin_user)
+      sign_in admin_user
     end
- 
-     it "redirects to clubs index" do
-       delete "/clubs/#{my_club.id}"
-       expect(response).to redirect_to clubs_path
-     end
-   end
 
+	  describe "DELETE destroy" do
+	    it "deletes the club" do
+	      delete "/clubs/#{my_club.id}"
+	      count = Club.where({id: my_club.id}).size   
+	      expect(count).to eq 0
+	    end
+	 
+	     it "redirects to clubs index" do
+	       delete "/clubs/#{my_club.id}"
+	       expect(response).to redirect_to clubs_path
+	     end
+	   end
+	 end
+
+	context 'member user' do
+	 	describe "DELETE destroy" do
+	    it "redirects to clubs index" do
+	      delete "/clubs/#{my_club.id}"
+	      expect(response).to redirect_to club_path(my_club.id)
+	    end
+	  end
+	end
 end
