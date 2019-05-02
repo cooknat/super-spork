@@ -3,11 +3,12 @@
 require "rails_helper"
 
 RSpec.describe ClubsController, type: :request do
-  let(:my_club) { FactoryBot.create(:club, name: "my fecking great club", club_type: "Drama") }
+	let(:member_user) { FactoryBot.create(:user, email: 'thing@thing.com', password: 'thingy') }
+	let(:owner_user) { User.create!(email: "owner_user@bloccit.com", password: "helloworld", role: :member) }
+	let(:admin_user) { User.create!(email: "admin_user@bloccit.com", password: "helloworld", role: :admin) }
+  let(:my_club) { FactoryBot.create(:club, name: "my fecking great club", club_type: "Drama", user_id: owner_user.id) }
   
    before do
-     member_user = User.create!(email: "member_user@bloccit.com", password: "helloworld", role: :member)
-     create_session(member_user)
      sign_in member_user
    end
 
@@ -83,8 +84,6 @@ RSpec.describe ClubsController, type: :request do
 
   context 'admin user' do
   	before do
-      admin_user = User.create!(email: "admin_user@bloccit.com", password: "helloworld", role: :admin)
-      create_session(admin_user)
       sign_in admin_user
     end
 
@@ -102,7 +101,32 @@ RSpec.describe ClubsController, type: :request do
 	   end
 	 end
 
+	context 'user is club owner' do
+    let!(:art_club) { FactoryBot.create(:club, name: "my fecking great art club", club_type: "Art", user_id: owner_user.id ) }
+
+    before do      
+      sign_in owner_user
+    end
+
+	  describe "DELETE destroy" do
+	    it "deletes the club" do
+	      delete "/clubs/#{art_club.id}"
+	      count = Club.where({id: art_club.id}).size   
+	      expect(count).to eq 0
+	    end
+	 
+	     it "redirects to clubs index" do
+	       delete "/clubs/#{art_club.id}"
+	       expect(response).to redirect_to clubs_path
+	     end
+	   end
+	 end
+
 	context 'member user' do
+		before do
+			sign_in member_user
+		end
+
 	 	describe "DELETE destroy" do
 	    it "redirects to clubs index" do
 	      delete "/clubs/#{my_club.id}"

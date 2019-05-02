@@ -1,8 +1,8 @@
 class ClubsController < ApplicationController
+  attr_reader :owner
+	# before_action :require_sign_in, only: [:delete, :destroy]
 
-	 # before_action :require_sign_in, only: [:delete, :destroy]
-
-   before_action :authorize_user, only: [:delete, :destroy]
+  before_action :authorize_user, only: [:delete, :destroy]
 
   def index
     @clubs = if params[:club]
@@ -14,6 +14,7 @@ class ClubsController < ApplicationController
 
   def show
     @club = Club.find(params[:id])
+    @owner = User.find(@club.user_id)
   end
 
   def new
@@ -73,10 +74,14 @@ class ClubsController < ApplicationController
 
   private
 
-    def authorize_user
-      unless current_user.admin?
-        flash[:alert] = "You must be an admin to do that."
-        redirect_to club_path(params[:id])
-      end
-   end
+  def authorize_user
+    unless current_user.admin? || is_owner?
+      flash[:alert] = "You must be an admin to do that."
+      redirect_to club_path(params[:id])
+    end
+  end
+
+  def is_owner?  	
+  	current_user == find_owner_by_club_id(params[:id])
+  end
 end
