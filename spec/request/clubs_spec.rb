@@ -59,17 +59,56 @@ RSpec.describe ClubsController, type: :request do
     end
   end
 
-  describe "#edit" do
-    it "returns http success" do
-      get "/clubs/#{my_club.id}/edit"
-      expect(response.status).to eq 200
+  context 'admin user' do
+  	before do
+      sign_in admin_user
     end
 
-    it "renders the new template" do
-      get "/clubs/#{my_club.id}/edit"
-      expect(response).to render_template(:edit)
+    describe "#edit" do
+	    it "returns http success" do
+	      get "/clubs/#{my_club.id}/edit"
+	      expect(response.status).to eq 200
+	    end
+
+	    it "renders the new template" do
+	      get "/clubs/#{my_club.id}/edit"
+	      expect(response).to render_template(:edit)
+	    end
+	  end 
+	end   
+
+  context 'user is club owner' do
+    let!(:art_club) { FactoryBot.create(:club, name: "my fecking great art club", club_type: "Art", user_id: owner_user.id ) }
+
+    before do      
+      sign_in owner_user
     end
-  end
+
+    describe "#edit" do
+	    it "returns http success" do
+	      get "/clubs/#{art_club.id}/edit"
+	      expect(response.status).to eq 200
+	    end
+
+	    it "renders the new template" do
+	      get "/clubs/#{art_club.id}/edit"
+	      expect(response).to render_template(:edit)
+	    end
+    end
+  end  
+
+  context 'member user' do
+		before do
+			sign_in member_user
+		end
+
+		describe "#edit" do
+	    it "redirects to the club page " do
+	      get "/clubs/#{my_club.id}/edit"
+	      expect(response).to redirect_to club_path(my_club.id)
+	    end
+	  end 
+	end
 
   describe "#update" do
     it "updates club with new attributes" do

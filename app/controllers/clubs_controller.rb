@@ -2,7 +2,7 @@ class ClubsController < ApplicationController
   attr_reader :owner
 	# before_action :require_sign_in, only: [:delete, :destroy]
 
-  before_action :authorize_user, only: [:delete, :destroy]
+  before_action :authorize_user, only: [:delete, :destroy, :edit]
 
   def index
     @clubs = if params[:club]
