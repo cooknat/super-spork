@@ -6,7 +6,9 @@ RSpec.describe ClubsController, type: :request do
 	let(:member_user) { FactoryBot.create(:user, email: 'thing@thing.com', password: 'thingy') }
 	let(:owner_user) { User.create!(email: "owner_user@bloccit.com", password: "helloworld", role: :member) }
 	let(:admin_user) { User.create!(email: "admin_user@bloccit.com", password: "helloworld", role: :admin) }
-  let(:my_club) { FactoryBot.create(:club, name: "my fecking great club", club_type: "Drama", user_id: owner_user.id) }
+	let(:club_type) { ClubType.create!(name: 'shiny new clubtype') }
+  let(:my_club) { FactoryBot.create(:club, name: "my fecking great club", club_type_id: club_type.id, user_id: owner_user.id) }
+  
   
    before do
      sign_in member_user
@@ -78,7 +80,7 @@ RSpec.describe ClubsController, type: :request do
 	end   
 
   context 'user is club owner' do
-    let!(:art_club) { FactoryBot.create(:club, name: "my fecking great art club", club_type: "Art", user_id: owner_user.id ) }
+    let!(:art_club) { FactoryBot.create(:club, name: "my fecking great art club", club_type_id: club_type.id, user_id: owner_user.id ) }
 
     before do      
       sign_in owner_user
@@ -141,7 +143,7 @@ RSpec.describe ClubsController, type: :request do
 	 end
 
 	context 'user is club owner' do
-    let!(:art_club) { FactoryBot.create(:club, name: "my fecking great art club", club_type: "Art", user_id: owner_user.id ) }
+    let!(:art_club) { FactoryBot.create(:club, name: "my fecking great art club", club_type_id: club_type.id, user_id: owner_user.id ) }
 
     before do      
       sign_in owner_user

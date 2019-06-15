@@ -8,7 +8,8 @@
   - @clubs.each do |club|
     %li
       = link_to club.name, club_path(club.id)
-      Club Type  
-      = club.club_type
+      Club Type 
+      = ClubType.find(club.club_type_id).name if club.club_type_id.present?
 %p
   = link_to 'Create new club', new_club_path
+  

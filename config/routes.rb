@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :clubs
+  resources :club_types, only: [:new, :create]
 
   get "welcome/index"
   get "welcome/about"

@@ -1,6 +1,7 @@
 %h1
   = @club.name
-  = "#{@club.club_type} club"
+%div
+  = "#{ClubType.find(@club.club_type_id).name} club" if @club.club_type_id.present?
   = "Club owner #{@owner.email}"
   = link_to "Edit club", edit_club_path
   = link_to "Delete club", @club, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this club?' }

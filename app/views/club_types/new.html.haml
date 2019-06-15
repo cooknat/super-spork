@@ -1,0 +1,8 @@
+%h2
+  Add a club type
+= form_for @club_type do |f| 
+  %div
+    = f.label :name
+    = f.text_field :name
+  %div
+    = f.submit "Save" 
