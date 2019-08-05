@@ -52,11 +52,11 @@ RSpec.describe ClubsController, type: :request do
 
   describe "#create" do
     it "increases the number of Club by 1" do
-      expect { post "/clubs/", params: {club: {name: "New Club"}} }.to change(Club, :count).by(1)
+      expect { post "/clubs/", params: {club: {name: "New Club", club_type_id: club_type.id }} }.to change(Club, :count).by(1)
     end
 
     it "redirects to the new club" do
-      post "/clubs/", params: {club: {name: "New Club"}}
+      post "/clubs/", params: {club: {name: "New Club", club_type_id: club_type.id}}
       expect(response).to redirect_to Club.last
     end
   end

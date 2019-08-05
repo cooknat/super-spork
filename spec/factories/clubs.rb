@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "factory_bot"
 
 FactoryBot.define do
@@ -8,7 +6,7 @@ FactoryBot.define do
     address { "High Street, London" }
     contact { "Mary Poppins" }
     email { "mary.poppins@summerclub.co.uk" }
-    club_type_id { 20 }
+    association :club_type
     active { true }
   end
 end
