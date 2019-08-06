@@ -22,7 +22,6 @@ class ClubsController < ApplicationController
   end
 
   def create
-  	# binding.pry
     @club = Club.new
     @club.name = params[:club][:name]
     @club.address = params[:club][:address]
@@ -52,7 +51,6 @@ class ClubsController < ApplicationController
     @club.contact = params[:club][:contact]
     @club.email = params[:club][:email]
     @club.club_type_id = ClubType.find(params[:club][:club_type_id])
-    @club.active = params[:club][:active]
 
     if @club.save
       flash[:notice] = "Club was updated."

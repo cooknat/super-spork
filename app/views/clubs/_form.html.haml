@@ -12,7 +12,7 @@
 		= f.label :email
 		= f.text_field :email, placeholder: "Email of principal contact"
 	%div  
-		= f.select :club_type, options_for_select(ClubType.pluck(:name))
+		= f.select :club_type_id, options_for_select(ClubType.all.pluck(:name).uniq)
 	%div
 		= f.label :active
 		= f.check_box :active  

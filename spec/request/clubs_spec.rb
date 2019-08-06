@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "rails_helper"
 
 RSpec.describe ClubsController, type: :request do
@@ -114,11 +112,11 @@ RSpec.describe ClubsController, type: :request do
 
   describe "#update" do
     it "updates club with new attributes" do
-      expect { post "/clubs/", params: {club: {name: "New Club"}} }.to change(Club, :count).by(1)
+      expect { post "/clubs/", params: {club: {name: "New Club", club_type_id: club_type.id}} }.to change(Club, :count).by(1)
     end
 
     it "redirects to the new club" do
-      post "/clubs/", params: {club: {name: "New Club"}}
+      post "/clubs/", params: {club: {name: "New Club", club_type_id: club_type.id}}
       expect(response).to redirect_to Club.last
     end
   end
