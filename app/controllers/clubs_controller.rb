@@ -21,15 +21,15 @@ class ClubsController < ApplicationController
     @club = Club.new
   end
 
-  def create
+  def create  	
     @club = Club.new
     @club.name = params[:club][:name]
     @club.address = params[:club][:address]
     @club.contact = params[:club][:contact]
-    @club.email = params[:club][:email]
+    @club.email = current_user.email
     @club.user_id = current_user.id
     @club.active = params[:club][:active]
-    @club.club_type_id = ClubType.find(params[:club][:club_type_id])
+    @club.club_type_id = params[:club][:club_type_id]
     
 
     if @club.save

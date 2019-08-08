@@ -8,7 +8,6 @@ class ClubTypesController < ApplicationController
     @club_type.name = params[:club_type][:name]
 
     if @club_type.save
-    	# binding.pry
       flash[:notice] = "Club type was saved."
       redirect_to new_club_path
     else

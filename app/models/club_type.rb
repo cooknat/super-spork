@@ -4,4 +4,7 @@ class ClubType < ApplicationRecord
 		ClubType.where(name: name)
 	end
 
+	def self.find_or_initialize_by(name)
+		find_by_name(name) || ClubType.new
+  end
 end
