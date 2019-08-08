@@ -8,9 +8,6 @@
 	%div	  
 		= f.label :contact
 		= f.text_field :contact, placeholder: "Name of principal contact"
-	%div
-		= f.label :email
-		= f.text_field :email, placeholder: "Email of principal contact if different to current user"
 	%div  
 		= f.select :club_type_id, options_for_select(ClubType.all.pluck(:name, :id).uniq)
 	%div
