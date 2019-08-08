@@ -46,11 +46,11 @@ class ClubsController < ApplicationController
   end
 
   def update
+  	@club = Club.find(params[:id])
   	@club.name = params[:club][:name]
     @club.address = params[:club][:address]
     @club.contact = params[:club][:contact]
-    @club.email = params[:club][:email]
-    @club.club_type_id = ClubType.find(params[:club][:club_type_id])
+    @club.club_type_id = params[:club][:club_type_id]
 
     if @club.save
       flash[:notice] = "Club was updated."
