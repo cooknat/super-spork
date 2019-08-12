@@ -11,5 +11,6 @@
       Club Type 
       = ClubType.find(club.club_type_id).name if club.club_type_id.present?
 %p
-  = link_to 'Create new club', new_club_path
+  - if current_user.present?
+    = link_to 'Create new club', new_club_path
   

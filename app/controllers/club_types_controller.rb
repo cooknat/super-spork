@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ClubTypesController < ApplicationController
-	def new
+  def new
     @club_type = ClubType.new
   end
 

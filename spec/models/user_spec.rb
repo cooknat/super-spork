@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-	let(:user) { User.new(email: 'n@n.com', password: 'password1') }
+  let(:user) { User.new(email: "n@n.com", password: "password1") }
 
   describe "attributes" do
     it "responds to role" do
@@ -20,11 +20,11 @@ RSpec.describe User, type: :model do
   end
 
   describe "roles" do
-  	before { user.save! }
+    before { user.save! }
     it "is member by default" do
-      expect(user.role).to eq('member')
+      expect(user.role).to eq("member")
     end
- 
+
     context "member user" do
       it "returns true for #member?" do
         expect(user.member?).to be_truthy
@@ -45,8 +45,8 @@ RSpec.describe User, type: :model do
       end
 
       it "returns true for #admin?" do
-       expect(user.admin?).to be_truthy
-     end
-   end
- end
+        expect(user.admin?).to be_truthy
+      end
+    end
+  end
 end

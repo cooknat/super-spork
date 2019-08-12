@@ -1,7 +1,8 @@
-class User < ApplicationRecord
+# frozen_string_literal: true
 
-	before_save { self.role ||= :member }
-	has_many :clubs
+class User < ApplicationRecord
+  before_save { self.role ||= :member }
+  has_many :clubs
 
   before_save { self.email = email.downcase }
   # Include default devise modules. Others available are:
@@ -9,5 +10,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: [:member, :admin]
+  enum role: %i[member admin]
 end

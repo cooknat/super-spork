@@ -1,19 +1,20 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Club, type: :model do
   describe "attributes" do
     let(:club_type) { FactoryBot.create(:club_type) }
     let(:club) { FactoryBot.create(:club, club_type_id: club_type.id) }
- 
 
     it "has title and body attributes" do
       expect(club).to have_attributes(
-        name:      club.name,
-        address:   club.address,
-        contact:   club.contact,
-        email:     club.email,
+        name:         club.name,
+        address:      club.address,
+        contact:      club.contact,
+        email:        club.email,
         club_type_id: club_type.id,
-        active:    club.active
+        active:       club.active
       )
     end
   end

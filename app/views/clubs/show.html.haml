@@ -1,7 +1,8 @@
 %h1
-  = @club.name
+	= @club.name
 %div
-  = "#{ClubType.find(@club.club_type_id).name} club" if @club.club_type_id.present?
-  = "Club owner #{@owner.email}"
-  = link_to "Edit club", edit_club_path
-  = link_to "Delete club", @club, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this club?' }
+	= "#{ClubType.find(@club.club_type_id).name} club" if @club.club_type_id.present?
+	= "Club owner #{@owner.email}"
+	- if current_user.present? && (current_user.admin? || current_user.id == @club.user_id)
+		= link_to "Edit club", edit_club_path
+		= link_to "Delete club", @club, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this club?' }

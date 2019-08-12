@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class ClubsController < ApplicationController
   attr_reader :owner
-	# before_action :require_sign_in, only: [:delete, :destroy]
+  # before_action :require_sign_in, only: [:delete, :destroy]
 
-  before_action :authorize_user, only: [:delete, :destroy, :edit]
+  before_action :authorize_user, only: %i[delete destroy edit]
 
   def index
     @clubs = if params[:club]
@@ -21,7 +23,7 @@ class ClubsController < ApplicationController
     @club = Club.new
   end
 
-  def create  	
+  def create
     @club = Club.new
     @club.name = params[:club][:name]
     @club.address = params[:club][:address]
@@ -30,7 +32,6 @@ class ClubsController < ApplicationController
     @club.user_id = current_user.id
     @club.active = params[:club][:active]
     @club.club_type_id = params[:club][:club_type_id]
-    
 
     if @club.save
       flash[:notice] = "Club was saved."
@@ -42,12 +43,12 @@ class ClubsController < ApplicationController
   end
 
   def edit
-  	@club = Club.find(params[:id])
+    @club = Club.find(params[:id])
   end
 
   def update
-  	@club = Club.find(params[:id])
-  	@club.name = params[:club][:name]
+    @club = Club.find(params[:id])
+    @club.name = params[:club][:name]
     @club.address = params[:club][:address]
     @club.contact = params[:club][:contact]
     @club.club_type_id = params[:club][:club_type_id]
@@ -62,15 +63,15 @@ class ClubsController < ApplicationController
   end
 
   def destroy
-  	@club = Club.find(params[:id])
+    @club = Club.find(params[:id])
 
-     if @club.destroy
-       flash[:notice] = "\"#{@club.name}\" was deleted successfully."
-       redirect_to clubs_path
-     else
-       flash.now[:alert] = "There was an error deleting the club."
-       render :show
-     end
+    if @club.destroy
+      flash[:notice] = "\"#{@club.name}\" was deleted successfully."
+      redirect_to clubs_path
+    else
+      flash.now[:alert] = "There was an error deleting the club."
+      render :show
+    end
   end
 
   private
@@ -82,7 +83,7 @@ class ClubsController < ApplicationController
     end
   end
 
-  def is_owner?  	
-  	current_user == find_owner_by_club_id(params[:id])
+   def is_owner?
+    current_user == find_owner_by_club_id(params[:id])
   end
 end
